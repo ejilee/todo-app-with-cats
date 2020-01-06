@@ -1,0 +1,55 @@
+@import '../utils.scss';
+
+ul.catsList {
+    display: block;
+    width: 100%;
+    margin: 20px auto;
+    text-align: left;
+    list-style: none;
+
+    li.catsListItem {
+        height: 38px;
+        display: flex;
+        padding: 6px;
+        flex-flow: row nowrap;
+        align-content: space-between;
+
+        span {
+            flex: 1 70%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: $themeColor4;
+        }
+
+        .editButton {
+            padding: 0;
+            margin-left: 6px;
+            border: none;
+            background: none;
+            color: $themeColor5;
+            font-size: 1.4em;
+
+            &:hover {
+                color: $themeColor1;
+            }
+        }
+
+        .deleteButton {
+            margin-left: 6px;
+            padding: 0;
+            border: none;
+            background: none;
+            color: $themeColor5;
+            font-size: 1.4em;
+
+            &:hover {
+                color: $themeColor3;
+            }
+        }
+
+        & + & {
+            border-top: 1px solid red;
+        }
+    }
+}

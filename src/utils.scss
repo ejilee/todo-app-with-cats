@@ -1,0 +1,39 @@
+$themeColor1: #375077;
+$themeColor2: #f7f7f7;
+$themeColor3: #df5c74;
+$themeColor4: #333;
+$themeColor5: #999;
+$themeColor6: #fff;
+$themeColor7: #0c7759;
+
+// Small smartphones (portrait view)
+$screen-sm-min: 370px;
+// Medium tablets (portrait view)
+$screen-md-min: 720px;
+// Large tablets and desktops
+$screen-lg-min: 1024px;
+
+// Small devices
+@mixin smScreen {
+    @media (max-width: #{$screen-sm-min}) {
+        @content;
+    }
+}
+// Medium devices
+@mixin mdScreen {
+    @media (max-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+// Large devices
+@mixin lgScreen {
+    @media (max-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+// Custom devices
+@mixin ctScreen($screen) {
+    @media (min-width: $screen+'px') {
+        @content;
+    }
+}

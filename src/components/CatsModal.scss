@@ -1,0 +1,81 @@
+@import '../utils.scss';
+.modalWrapper {
+    position: fixed;
+    z-index: 50;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    &.modalTrue {
+        display: block;
+    }
+    &.modalFalse {
+        display: none;
+    }
+
+    .catsModal {
+        position: absolute;
+        z-index: 100;
+        width: 85%;
+        height: auto;
+        max-width: 500px;
+        min-height: 400px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: $themeColor6;
+        border: 1px solid $themeColor5;
+        border-radius: 6px;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+        padding: 20px;
+
+        .closeModal {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            border: none;
+            background: none;
+            color: $themeColor5;
+            font-size: 1.6em;
+            &:hover {
+                color: $themeColor1;
+            }
+        }
+
+        h3 {
+            display: block;
+            text-align: left;
+            color: $themeColor1;
+        }
+
+        form {
+            margin: 20px auto;
+            padding: 10px;
+            background-color: $themeColor2;
+
+            .catAdd {
+                padding: 0;
+                margin-left: 6px;
+                border: none;
+                background: none;
+                color: $themeColor3;
+                font-size: 1.6em;
+                vertical-align: middle;
+
+                &:hover {
+                    transform: translateY(2px);
+                }
+            }
+        }
+    }
+
+    .modalBg {
+        position: absolute;
+        z-index: 50;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+    }
+}
