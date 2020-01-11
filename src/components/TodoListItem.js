@@ -25,7 +25,7 @@ const TodoListItem = ({ cats, todo, todoItemToggle, todoItemRemove }) => {
                 {checked ? <IoIosCheckboxOutline /> : <IoMdSquareOutline />}
             </button>
             <span className="todoText">{text || '-'}</span>
-            {cat !== undefined ? (
+            {cat !== undefined && cat.id !== 0 ? (
                 <span className="catLabel">{cat.name || '-'}</span>
             ) : null}
             <button className="editButton">

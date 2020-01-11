@@ -8,6 +8,11 @@ import CatsModal from './components/CatsModal.js';
 // initial data array for categories
 const catsData = [
     {
+        id: 0,
+        sort: 0,
+        name: '-',
+    },
+    {
         id: 1,
         sort: 1,
         name: 'people',
@@ -29,7 +34,7 @@ const catsData = [
     },
 ];
 
-const bulkStartNum = 5;
+const bulkStartNum = 3;
 
 function createBulkTodos() {
     const array = [];
@@ -38,8 +43,8 @@ function createBulkTodos() {
             id: i,
             checked: false,
             cate: 0,
-            prior: 4,
-            text: `todo bbbbbitem #${i}`,
+            prior: 3,
+            text: `todo item #${i}`,
         });
     }
     return array;
@@ -72,6 +77,7 @@ function catsReducer(cats, action) {
             return cats.concat(action.newCat);
         case 'REMOVE':
             console.log('remove cat');
+
             return cats.filter(cat => cat.id !== action.catItemId);
         default:
             return cats;

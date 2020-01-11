@@ -10,7 +10,7 @@
     align-items: center;
     line-height: 1.5em;
 
-    &:hover{
+    &:hover {
         background-color: $themeColor2;
     }
 
@@ -78,9 +78,20 @@
             color: $themeColor3;
         }
     }
-
 }
 
 .todoChecked_true .todoText {
     text-decoration: line-through;
+}
+
+.todoListPriority1 .checkBox {
+    color: $themeColor3;
+}
+
+.todoListPriority2 .checkBox {
+    color: $themeColor1;
+}
+
+.todoListPriority3 .checkBox {
+    color: $themeColor5;
 }

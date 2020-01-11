@@ -11,13 +11,13 @@ const CatsList = ({ todos, cats, catRemove }) => {
             name +
             '\n' +
             '\n' +
-            'These todo items will lose their category tags.' +
+            'These todo items will be listed under uncategorized.' +
             '\n' +
             'Are you sure you want to delete this category?';
 
-        if (count === 0) {
+        if (id !== 0 && count === 0) {
             catRemove(id);
-        } else if (count > 0 && window.confirm(deleteMessage)) {
+        } else if (id !== 0 && count > 0 && window.confirm(deleteMessage)) {
             catRemove(id);
         } else {
             return;
@@ -31,22 +31,27 @@ const CatsList = ({ todos, cats, catRemove }) => {
                         {cat.name} (
                         {todos.filter(todo => todo.cate === cat.id).length})
                     </span>
-                    <button className="editButton">
-                        <IoMdCreate />
-                    </button>
-                    <button
-                        className="deleteButton"
-                        onClick={() =>
-                            onlickDelete(
-                                cat.id,
-                                cat.name,
-                                todos.filter(todo => todo.cate === cat.id)
-                                    .length,
-                            )
-                        }
-                    >
-                        <IoIosRemoveCircleOutline />
-                    </button>
+                    {cat.id !== 0 ? (
+                        <div>
+                            <button className="editButton">
+                                <IoMdCreate />
+                            </button>
+                            <button
+                                className="deleteButton"
+                                onClick={() =>
+                                    onlickDelete(
+                                        cat.id,
+                                        cat.name,
+                                        todos.filter(
+                                            todo => todo.cate === cat.id,
+                                        ).length,
+                                    )
+                                }
+                            >
+                                <IoIosRemoveCircleOutline />
+                            </button>
+                        </div>
+                    ) : null}
                 </li>
             ))}
         </ul>

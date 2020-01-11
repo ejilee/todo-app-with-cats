@@ -43,7 +43,6 @@ const InputForm = ({ cats, todoItemAdd }) => {
                 </button>
                 <div className="inputOptionCat">
                     <select onChange={catOnChange}>
-                        <option value="0">uncategorized</option>
                         {cats.map(cat => (
                             <option value={cat.id} key={cat.id}>
                                 {cat.name}
@@ -61,8 +60,8 @@ const InputForm = ({ cats, todoItemAdd }) => {
                     />
                     <label htmlFor="inputPriority1">
                         <IoIosFlag
-                            style={{ color: '#C33' }}
-                            alt="priority_first"
+                            style={{ color: '#df5c74' }}
+                            alt="priority_high"
                         />
                     </label>
                     <input
@@ -74,8 +73,8 @@ const InputForm = ({ cats, todoItemAdd }) => {
                     />
                     <label htmlFor="inputPriority2">
                         <IoIosFlag
-                            style={{ color: '#33A' }}
-                            alt="priority_high"
+                            style={{ color: '#375077' }}
+                            alt="priority_medium"
                         />
                     </label>
                     <input
@@ -84,22 +83,9 @@ const InputForm = ({ cats, todoItemAdd }) => {
                         name="inputPriority"
                         value="3"
                         onChange={prioOnChange}
-                    />
-                    <label htmlFor="inputPriority3">
-                        <IoIosFlag
-                            style={{ color: '#3A3' }}
-                            alt="priority_mendium"
-                        />
-                    </label>
-                    <input
-                        type="radio"
-                        id="inputPriority4"
-                        name="inputPriority"
-                        value="4"
-                        onChange={prioOnChange}
                         defaultChecked
                     />
-                    <label htmlFor="inputPriority4">
+                    <label htmlFor="inputPriority3">
                         <IoIosFlag
                             style={{ color: '#999' }}
                             alt="priority_low"
