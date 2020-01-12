@@ -2,7 +2,14 @@ import React from 'react';
 import TodoListItem from './TodoListItem';
 import './TodoList.scss';
 
-const TodoList = ({ cats, todos, todoItemToggle, todoItemRemove }) => {
+const TodoList = ({
+    cats,
+    todos,
+    todoItemRemove,
+    todoItemToggleCheck,
+    todoItemToggleEdit,
+    todoItemModify,
+}) => {
     return (
         <div className="TodoListPage">
             <ul>
@@ -11,8 +18,10 @@ const TodoList = ({ cats, todos, todoItemToggle, todoItemRemove }) => {
                         cats={cats}
                         todo={todo}
                         key={todo.id}
-                        todoItemToggle={todoItemToggle}
                         todoItemRemove={todoItemRemove}
+                        todoItemToggleCheck={todoItemToggleCheck}
+                        todoItemToggleEdit={todoItemToggleEdit}
+                        todoItemModify={todoItemModify}
                     />
                 ))}
             </ul>

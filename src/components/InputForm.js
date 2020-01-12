@@ -21,7 +21,7 @@ const InputForm = ({ cats, todoItemAdd }) => {
 
     const onSubmit = useCallback(
         e => {
-            todoItemAdd(inputValue, catValue, prioValue);
+            if (inputValue !== '') todoItemAdd(inputValue, catValue, prioValue);
             setInputValue('');
             e.preventDefault();
         },
@@ -37,6 +37,7 @@ const InputForm = ({ cats, todoItemAdd }) => {
                     placeholder="new entry"
                     value={inputValue}
                     onChange={inputOnChange}
+                    autoFocus
                 />
                 <button className="todoInputButton" type="submit">
                     <IoIosAddCircleOutline />

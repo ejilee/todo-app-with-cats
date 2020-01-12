@@ -5,32 +5,30 @@ import TodoCats from './components/TodoCats';
 import TodoList from './components/TodoList';
 import CatsModal from './components/CatsModal.js';
 
-// initial data array for categories
 const catsData = [
     {
         id: 0,
         sort: 0,
         name: '-',
+        isBeingEdited: false,
     },
     {
         id: 1,
         sort: 1,
-        name: 'people',
+        name: 'plants',
+        isBeingEdited: false,
     },
     {
         id: 2,
         sort: 2,
         name: 'cats',
+        isBeingEdited: false,
     },
     {
         id: 3,
         sort: 3,
         name: 'dogs',
-    },
-    {
-        id: 4,
-        sort: 4,
-        name: 'plants',
+        isBeingEdited: false,
     },
 ];
 
@@ -45,6 +43,7 @@ function createBulkTodos() {
             cate: 0,
             prior: 3,
             text: `todo item #${i}`,
+            isBeingEdited: false,
         });
     }
     return array;
@@ -53,17 +52,30 @@ function createBulkTodos() {
 function todoReducer(todos, action) {
     switch (action.type) {
         case 'INSERT':
-            console.log('add t');
             return todos.concat(action.todo);
         case 'REMOVE':
-            console.log('remove t');
             return todos.filter(todo => todo.id !== action.todoItemId);
-        case 'TOGGLE':
-            console.log('toggle t');
+        case 'TOGGLE_CHECK':
             return todos.map(todo =>
                 todo.id === action.todoItemId
                     ? { ...todo, checked: !todo.checked }
                     : todo,
+            );
+        case 'TOGGLE_EDIT':
+            return todos.map(todo =>
+                todo.id === action.todoItemId
+                    ? { ...todo, isBeingEdited: !todo.isBeingEdited }
+                    : { ...todo, isBeingEdited: false },
+            );
+        case 'MODIFY':
+            return todos.map(todo =>
+                todo.id === action.todoItemId
+                    ? { ...todo, text: action.todoItemText }
+                    : todo,
+            );
+        case 'UNCATEGORIZE':
+            return todos.map(todo =>
+                todo.cate === action.catItemId ? { ...todo, cate: 0 } : todo,
             );
         default:
             return todos;
@@ -73,12 +85,21 @@ function todoReducer(todos, action) {
 function catsReducer(cats, action) {
     switch (action.type) {
         case 'INSERT':
-            console.log('add cat');
             return cats.concat(action.newCat);
         case 'REMOVE':
-            console.log('remove cat');
-
             return cats.filter(cat => cat.id !== action.catItemId);
+        case 'TOGGLE_EDIT':
+            return cats.map(cat =>
+                cat.id === action.catItemId
+                    ? { ...cat, isBeingEdited: !cat.isBeingEdited }
+                    : { ...cat, isBeingEdited: false },
+            );
+        case 'MODIFY':
+            return cats.map(cat =>
+                cat.id === action.catItemId
+                    ? { ...cat, name: action.catItemText }
+                    : cat,
+            );
         default:
             return cats;
     }
@@ -95,7 +116,6 @@ function App() {
     let nextTodoId = useRef(bulkStartNum + 1);
     let nextCatId = useRef(5);
 
-    // function - add new todo item
     const todoItemAdd = useCallback((inputValue, catValue, prioValue) => {
         const todo = {
             id: nextTodoId.current,
@@ -103,19 +123,26 @@ function App() {
             cate: catValue,
             prior: prioValue,
             text: inputValue,
+            isBeingEdited: false,
         };
         dispatchTodo({ type: 'INSERT', todo });
         nextTodoId.current += 1;
     }, []);
 
-    // function - remove todo item
     const todoItemRemove = useCallback(todoItemId => {
         dispatchTodo({ type: 'REMOVE', todoItemId });
     }, []);
 
-    // function - toggle checkbox for todo item
-    const todoItemToggle = useCallback(todoItemId => {
-        dispatchTodo({ type: 'TOGGLE', todoItemId });
+    const todoItemToggleCheck = useCallback(todoItemId => {
+        dispatchTodo({ type: 'TOGGLE_CHECK', todoItemId });
+    }, []);
+
+    const todoItemToggleEdit = useCallback(todoItemId => {
+        dispatchTodo({ type: 'TOGGLE_EDIT', todoItemId });
+    }, []);
+
+    const todoItemModify = useCallback((todoItemId, todoItemText) => {
+        dispatchTodo({ type: 'MODIFY', todoItemId, todoItemText });
     }, []);
 
     const openCatsModal = useCallback(() => {
@@ -126,20 +153,28 @@ function App() {
         setCatsModalState(false);
     }, []);
 
-    // function - add new todo item
     const catAdd = useCallback(inputValue => {
         const newCat = {
             id: nextCatId.current,
             sort: 2,
             name: inputValue,
+            isBeingEdited: false,
         };
         dispatchCats({ type: 'INSERT', newCat });
         nextCatId.current += 1;
     }, []);
 
-    // function - remove todo item
     const catRemove = useCallback(catItemId => {
         dispatchCats({ type: 'REMOVE', catItemId });
+        dispatchTodo({ type: 'UNCATEGORIZE', catItemId });
+    }, []);
+
+    const catToggleEdit = useCallback(catItemId => {
+        dispatchCats({ type: 'TOGGLE_EDIT', catItemId });
+    }, []);
+
+    const catModify = useCallback((catItemId, catItemText) => {
+        dispatchCats({ type: 'MODIFY', catItemId, catItemText });
     }, []);
 
     return (
@@ -153,6 +188,8 @@ function App() {
                     closeCatsModal={closeCatsModal}
                     catAdd={catAdd}
                     catRemove={catRemove}
+                    catToggleEdit={catToggleEdit}
+                    catModify={catModify}
                 />
                 <InputForm cats={cats} todoItemAdd={todoItemAdd} />
                 <TodoCats
@@ -163,8 +200,10 @@ function App() {
                 <TodoList
                     cats={cats}
                     todos={todos}
-                    todoItemToggle={todoItemToggle}
                     todoItemRemove={todoItemRemove}
+                    todoItemToggleCheck={todoItemToggleCheck}
+                    todoItemToggleEdit={todoItemToggleEdit}
+                    todoItemModify={todoItemModify}
                 />
             </main>
             <footer className="App-footer">you need new socks in 2020</footer>

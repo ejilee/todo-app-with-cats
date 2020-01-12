@@ -16,9 +16,9 @@ body {
     }
 
     > * {
-        width: 100%;
+        width: inherit;
         padding: 10px 16px;
-        margin: 0 auto;
+        margin: 0;
     }
 
     .App-header {
@@ -34,7 +34,7 @@ body {
         text-align: center;
         font-size: 1.4em;
         padding: 24px;
-        max-width: 100vw;
+        max-width: 100%;
     }
 
     .App-footer {
