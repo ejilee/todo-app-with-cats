@@ -5,6 +5,23 @@ import TodoCats from './components/TodoCats';
 import TodoList from './components/TodoList';
 import CatsModal from './components/CatsModal.js';
 
+const bulkStartNum = 2500;
+
+function createBulkTodos() {
+    const array = [];
+    for (let i = 1; i <= bulkStartNum; i++) {
+        array.push({
+            id: i,
+            checked: false,
+            cate: 0,
+            prior: 3,
+            text: `todo item #${i}`,
+            isBeingEdited: false,
+        });
+    }
+    return array;
+}
+
 const catsData = [
     {
         id: 0,
@@ -32,23 +49,6 @@ const catsData = [
     },
 ];
 
-const bulkStartNum = 3;
-
-function createBulkTodos() {
-    const array = [];
-    for (let i = 1; i <= bulkStartNum; i++) {
-        array.push({
-            id: i,
-            checked: false,
-            cate: 0,
-            prior: 3,
-            text: `todo item #${i}`,
-            isBeingEdited: false,
-        });
-    }
-    return array;
-}
-
 function todoReducer(todos, action) {
     switch (action.type) {
         case 'INSERT':
@@ -65,7 +65,7 @@ function todoReducer(todos, action) {
             return todos.map(todo =>
                 todo.id === action.todoItemId
                     ? { ...todo, isBeingEdited: !todo.isBeingEdited }
-                    : { ...todo, isBeingEdited: false },
+                    : todo,
             );
         case 'MODIFY':
             return todos.map(todo =>
@@ -92,7 +92,7 @@ function catsReducer(cats, action) {
             return cats.map(cat =>
                 cat.id === action.catItemId
                     ? { ...cat, isBeingEdited: !cat.isBeingEdited }
-                    : { ...cat, isBeingEdited: false },
+                    : cat,
             );
         case 'MODIFY':
             return cats.map(cat =>
@@ -142,7 +142,7 @@ function App() {
     }, []);
 
     const todoItemModify = useCallback((todoItemId, todoItemText) => {
-        dispatchTodo({ type: 'MODIFY', todoItemId, todoItemText });
+        // dispatchTodo({ type: 'MODIFY', todoItemId, todoItemText });
     }, []);
 
     const openCatsModal = useCallback(() => {

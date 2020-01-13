@@ -15,7 +15,7 @@ const TodoList = ({
             <ul>
                 {todos.map(todo => (
                     <TodoListItem
-                        cats={cats}
+                        cat={cats.find(cat => cat.id === todo.cate)}
                         todo={todo}
                         key={todo.id}
                         todoItemRemove={todoItemRemove}

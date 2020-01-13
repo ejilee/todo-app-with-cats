@@ -7,16 +7,28 @@ import {
 } from 'react-icons/io';
 import './CatsListItem.scss';
 
-const CatsListItem = ({ todos, cat, catRemove, catToggleEdit, catModify }) => {
+const CatsListItem = ({
+    todosCount,
+    cat,
+    catRemove,
+    catToggleEdit,
+    catModify,
+}) => {
     const { id, name, isBeingEdited } = cat;
 
-    const count = todos.filter(todo => todo.cate === id).length;
-
     const [inputValue, setInputValue] = useState(name);
+    console.log(inputValue);
 
     const inputOnChange = useCallback(e => {
         setInputValue(e.target.value);
     }, []);
+
+    const inputOnKey = useCallback(
+        e => {
+            if (e.keyCode === 27) catToggleEdit(id);
+        },
+        [id, catToggleEdit],
+    );
 
     const inputOnSubmitEdit = useCallback(
         e => {
@@ -28,10 +40,10 @@ const CatsListItem = ({ todos, cat, catRemove, catToggleEdit, catModify }) => {
     );
 
     const onCatDelete = useCallback(
-        (id, name, count) => {
+        (id, name, todosCount) => {
             let deleteMessage =
                 'You have  ' +
-                count +
+                todosCount +
                 '  todo items in this category :  ' +
                 name +
                 '\n' +
@@ -40,9 +52,13 @@ const CatsListItem = ({ todos, cat, catRemove, catToggleEdit, catModify }) => {
                 '\n' +
                 'Are you sure you want to delete this category?';
 
-            if (id !== 0 && count === 0) {
+            if (id !== 0 && todosCount === 0) {
                 catRemove(id);
-            } else if (id !== 0 && count > 0 && window.confirm(deleteMessage)) {
+            } else if (
+                id !== 0 &&
+                todosCount > 0 &&
+                window.confirm(deleteMessage)
+            ) {
                 catRemove(id);
             } else {
                 return;
@@ -58,8 +74,10 @@ const CatsListItem = ({ todos, cat, catRemove, catToggleEdit, catModify }) => {
                     <input
                         className="catNameEdit"
                         type="text"
+                        maxLength="24"
                         value={inputValue}
                         onChange={inputOnChange}
+                        onKeyDown={inputOnKey}
                         autoFocus
                     />
                     <button
@@ -79,7 +97,7 @@ const CatsListItem = ({ todos, cat, catRemove, catToggleEdit, catModify }) => {
             ) : (
                 <>
                     <span className="catName">
-                        {name} ({count})
+                        {inputValue} ({todosCount})
                     </span>
                     <button
                         className="editButton"
@@ -91,7 +109,9 @@ const CatsListItem = ({ todos, cat, catRemove, catToggleEdit, catModify }) => {
                     {id !== 0 ? (
                         <button
                             className="deleteButton"
-                            onClick={() => onCatDelete(id, name, count)}
+                            onClick={() =>
+                                onCatDelete(id, inputValue, todosCount)
+                            }
                         >
                             <IoIosRemoveCircleOutline />
                         </button>

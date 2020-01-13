@@ -40,7 +40,10 @@ const CatsModal = ({
                 <ul className="catsList">
                     {cats.map(cat => (
                         <CatsListItem
-                            todos={todos}
+                            todosCount={
+                                todos.filter(todo => todo.cate === cat.id)
+                                    .length
+                            }
                             cat={cat}
                             key={cat.id}
                             catRemove={catRemove}
@@ -54,7 +57,8 @@ const CatsModal = ({
                     <input
                         className="todoInputText"
                         type="text"
-                        placeholder="new category"
+                        placeholder="new category name"
+                        maxLength="24"
                         value={inputValue}
                         onChange={inputOnChange}
                         autoFocus

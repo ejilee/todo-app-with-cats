@@ -3,8 +3,8 @@
 .todoListItem {
     width: 100%;
     min-height: 32px;
-    margin: 10px 0;
     display: flex;
+    margin: 6px 0;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
@@ -25,6 +25,15 @@
         &:hover {
             color: $themeColor1;
         }
+    }
+
+    .priorityRadio {
+        padding: 0;
+        margin-right: 6px;
+        background: none;
+        border: none;
+        color: $themeColor5;
+        font-size: 0.8em;
     }
 
     .catLabel {
@@ -90,14 +99,14 @@
     color: $themeColor5;
 }
 
-.todoListPriority1 .checkBox {
+.todoListPriority1 .priorityRadio {
     color: $themeColor3;
 }
 
-.todoListPriority2 .checkBox {
+.todoListPriority2 .priorityRadio {
     color: $themeColor1;
 }
 
-.todoListPriority3 .checkBox {
+.todoListPriority3 .priorityRadio {
     color: $themeColor5;
 }

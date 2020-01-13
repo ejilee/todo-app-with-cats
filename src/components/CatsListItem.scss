@@ -6,7 +6,11 @@ li.catsListItem {
     padding: 6px;
     flex-flow: row nowrap;
     align-content: space-between;
-    r: $themeColor1;
+    color: $themeColor1;
+
+    &:hover {
+        background-color: $themeColor2;
+    }
 
     .catName {
         flex: 1 70%;

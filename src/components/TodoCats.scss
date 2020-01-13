@@ -1,7 +1,8 @@
 @import '../utils.scss';
 
 .TodoListCatsList {
-    display: block;
+    display: flex;
+    flex-flow: row wrap-reverse;
     width: 100%;
     list-style: none;
     text-align: left;
@@ -9,7 +10,7 @@
     bottom: -1px;
 
     .TodoListCat {
-        display: inline-block;
+        order: 2;
         border: solid 1px $themeColor5;
         border-bottom: none;
         padding: 6px 12px;
@@ -24,20 +25,24 @@
         }
 
         &.currentCat {
+            order: 1;
             background-color: $themeColor6;
             color: $themeColor1;
             z-index: 30;
         }
-        
     }
 
     .TodoListCat + .TodoListCat {
-            margin-left: 6px;
+        margin-left: 6px;
     }
-
 
     * {
         vertical-align: sub;
+    }
+
+    .TodoListCatAdd {
+        font-size: 1.6em;
+        line-height: 0;
     }
 }
 

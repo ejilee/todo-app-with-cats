@@ -6,11 +6,12 @@ import {
     IoIosCheckboxOutline,
     IoIosCheckmark,
     IoIosClose,
+    IoIosFlag,
 } from 'react-icons/io';
 import './TodoListItem.scss';
 
 const TodoListItem = ({
-    cats,
+    cat,
     todo,
     todoItemRemove,
     todoItemToggleCheck,
@@ -18,13 +19,20 @@ const TodoListItem = ({
     todoItemModify,
 }) => {
     const { id, checked, cate, prior, text, isBeingEdited } = todo;
-    const cat = cats.find(cat => cat.id === cate);
 
     const [inputValue, setInputValue] = useState(text);
+    console.log(inputValue);
 
     const inputOnChange = useCallback(e => {
         setInputValue(e.target.value);
     }, []);
+
+    const inputOnKey = useCallback(
+        e => {
+            if (e.keyCode === 27) todoItemToggleEdit(id);
+        },
+        [id, todoItemToggleEdit],
+    );
 
     const inputOnSubmitEdit = useCallback(
         e => {
@@ -52,6 +60,12 @@ const TodoListItem = ({
             >
                 {checked ? <IoIosCheckboxOutline /> : <IoMdSquareOutline />}
             </button>
+            {prior !== 3 ? (
+                <button className="priorityRadio">
+                    <IoIosFlag />
+                </button>
+            ) : null}
+
             {isBeingEdited ? (
                 <form className="todoText" onSubmit={inputOnSubmitEdit}>
                     <input
@@ -59,6 +73,7 @@ const TodoListItem = ({
                         type="text"
                         value={inputValue}
                         onChange={inputOnChange}
+                        onKeyDown={inputOnKey}
                         autoFocus
                     />
                     <button
@@ -77,9 +92,11 @@ const TodoListItem = ({
                 </form>
             ) : (
                 <>
-                    <span className="todoText">{text || '-'}</span>
+                    <span className="todoText">{inputValue || '-'}</span>
                     {cat !== undefined && cat.id !== 0 ? (
-                        <span className="catLabel">{cat.name || '-'}</span>
+                        <span className={`catLabel catNum` + cate}>
+                            {cat.name || '-'}
+                        </span>
                     ) : null}
                     <button
                         className="editButton"
