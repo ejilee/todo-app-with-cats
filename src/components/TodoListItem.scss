@@ -27,13 +27,13 @@
         }
     }
 
-    .priorityRadio {
+    .priorityFlag {
         padding: 0;
         margin-right: 6px;
         background: none;
         border: none;
         color: $themeColor5;
-        font-size: 0.8em;
+        font-size: 1.2em;
     }
 
     .catLabel {
@@ -99,14 +99,14 @@
     color: $themeColor5;
 }
 
-.todoListPriority1 .priorityRadio {
+.todoListPriority1 .priorityFlag {
     color: $themeColor3;
 }
 
-.todoListPriority2 .priorityRadio {
+.todoListPriority2 .priorityFlag {
     color: $themeColor1;
 }
 
-.todoListPriority3 .priorityRadio {
+.todoListPriority3 .priorityFlag {
     color: $themeColor5;
 }
