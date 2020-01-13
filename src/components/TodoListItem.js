@@ -61,7 +61,7 @@ const TodoListItem = ({
                 {checked ? <IoIosCheckboxOutline /> : <IoMdSquareOutline />}
             </button>
             {prior !== 3 ? (
-                <button className="priorityRadio">
+                <button className="priorityFlag">
                     <IoIosFlag />
                 </button>
             ) : null}
