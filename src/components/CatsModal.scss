@@ -18,9 +18,9 @@
         z-index: 100;
         width: 85%;
         height: auto;
-        max-width: 500px;
+        max-width: 400px;
         min-height: 400px;
-        top: 50%;
+        top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
         background-color: $themeColor6;
@@ -36,7 +36,7 @@
             border: none;
             background: none;
             color: $themeColor5;
-            font-size: 1.6em;
+            font-size: 3em;
             &:hover {
                 color: $themeColor1;
             }
@@ -48,10 +48,23 @@
             color: $themeColor1;
         }
 
-        form {
+        ul.catsList {
+            display: block;
+            width: 100%;
+            margin: 20px auto;
+            text-align: left;
+            list-style: none;
+        }
+
+        .catAddForm {
+            display: flex;
             margin: 20px auto;
             padding: 10px;
             background-color: $themeColor2;
+
+            .todoInputText {
+                flex: 1;
+            }
 
             .catAdd {
                 padding: 0;

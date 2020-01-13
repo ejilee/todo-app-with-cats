@@ -1,6 +1,6 @@
 import React from 'react';
 import './TodoCats.scss';
-import { IoIosCog } from 'react-icons/io';
+import { IoMdFlower } from 'react-icons/io';
 
 const TodoCats = ({ cats, todos, openCatsModal }) => {
     return (
@@ -17,7 +17,7 @@ const TodoCats = ({ cats, todos, openCatsModal }) => {
                     className="TodoListCat TodoListCatAdd"
                     onClick={() => openCatsModal()}
                 >
-                    <IoIosCog />
+                    <IoMdFlower />
                 </li>
             </ul>
             <div className="TodoListCatsListBottom"></div>

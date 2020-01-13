@@ -5,7 +5,7 @@ import { IoIosAddCircleOutline, IoIosFlag } from 'react-icons/io';
 const InputForm = ({ cats, todoItemAdd }) => {
     const [inputValue, setInputValue] = useState('');
     const [catValue, setCatValue] = useState(0);
-    const [prioValue, setPrioValue] = useState(4);
+    const [prioValue, setPrioValue] = useState(3);
 
     const inputOnChange = useCallback(e => {
         setInputValue(e.target.value);
@@ -21,7 +21,7 @@ const InputForm = ({ cats, todoItemAdd }) => {
 
     const onSubmit = useCallback(
         e => {
-            todoItemAdd(inputValue, catValue, prioValue);
+            if (inputValue !== '') todoItemAdd(inputValue, catValue, prioValue);
             setInputValue('');
             e.preventDefault();
         },
@@ -31,16 +31,6 @@ const InputForm = ({ cats, todoItemAdd }) => {
     return (
         <div className="inputBox">
             <form onSubmit={onSubmit}>
-                <input
-                    className="todoInputText"
-                    type="text"
-                    placeholder="new entry"
-                    value={inputValue}
-                    onChange={inputOnChange}
-                />
-                <button className="todoInputButton" type="submit">
-                    <IoIosAddCircleOutline />
-                </button>
                 <div className="inputOptionCat">
                     <select onChange={catOnChange}>
                         {cats.map(cat => (
@@ -53,15 +43,16 @@ const InputForm = ({ cats, todoItemAdd }) => {
                 <div className="inputOptionPrio">
                     <input
                         type="radio"
-                        id="inputPriority1"
+                        id="inputPriority3"
                         name="inputPriority"
-                        value="1"
+                        value="3"
                         onChange={prioOnChange}
+                        defaultChecked
                     />
-                    <label htmlFor="inputPriority1">
+                    <label htmlFor="inputPriority3">
                         <IoIosFlag
-                            style={{ color: '#df5c74' }}
-                            alt="priority_high"
+                            style={{ color: '#999' }}
+                            alt="priority_low"
                         />
                     </label>
                     <input
@@ -79,19 +70,29 @@ const InputForm = ({ cats, todoItemAdd }) => {
                     </label>
                     <input
                         type="radio"
-                        id="inputPriority3"
+                        id="inputPriority1"
                         name="inputPriority"
-                        value="3"
+                        value="1"
                         onChange={prioOnChange}
-                        defaultChecked
                     />
-                    <label htmlFor="inputPriority3">
+                    <label htmlFor="inputPriority1">
                         <IoIosFlag
-                            style={{ color: '#999' }}
-                            alt="priority_low"
+                            style={{ color: '#df5c74' }}
+                            alt="priority_high"
                         />
                     </label>
                 </div>
+                <input
+                    className="todoInputText"
+                    type="text"
+                    placeholder="new entry"
+                    value={inputValue}
+                    onChange={inputOnChange}
+                    autoFocus
+                />
+                <button className="todoInputButton" type="submit">
+                    <IoIosAddCircleOutline />
+                </button>
             </form>
         </div>
     );

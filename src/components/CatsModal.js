@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import './CatsModal.scss';
-import { IoIosAddCircleOutline } from 'react-icons/io';
-import CatsList from './CatsList.js';
+import { IoIosAddCircleOutline, IoIosClose } from 'react-icons/io';
+import CatsListItem from './CatsListItem.js';
 
 const CatsModal = ({
     todos,
@@ -10,6 +10,8 @@ const CatsModal = ({
     closeCatsModal,
     catAdd,
     catRemove,
+    catToggleEdit,
+    catModify,
 }) => {
     const catsModalClass = catsModalState ? 'modalTrue' : 'modalFalse';
     const [inputValue, setInputValue] = useState('');
@@ -20,8 +22,7 @@ const CatsModal = ({
 
     const onSubmit = useCallback(
         e => {
-            console.log(inputValue);
-            catAdd(inputValue);
+            if (inputValue !== '') catAdd(inputValue);
             setInputValue('');
             e.preventDefault();
         },
@@ -32,19 +33,35 @@ const CatsModal = ({
         <div className={'modalWrapper ' + catsModalClass}>
             <div className="catsModal">
                 <button className="closeModal" onClick={closeCatsModal}>
-                    X
+                    <IoIosClose />
                 </button>
                 <h3>Manage Categories</h3>
 
-                <CatsList todos={todos} cats={cats} catRemove={catRemove} />
+                <ul className="catsList">
+                    {cats.map(cat => (
+                        <CatsListItem
+                            todosCount={
+                                todos.filter(todo => todo.cate === cat.id)
+                                    .length
+                            }
+                            cat={cat}
+                            key={cat.id}
+                            catRemove={catRemove}
+                            catToggleEdit={catToggleEdit}
+                            catModify={catModify}
+                        />
+                    ))}
+                </ul>
 
-                <form onSubmit={onSubmit}>
+                <form className="catAddForm" onSubmit={onSubmit}>
                     <input
                         className="todoInputText"
                         type="text"
-                        placeholder="new category"
+                        placeholder="new category name"
+                        maxLength="24"
                         value={inputValue}
                         onChange={inputOnChange}
+                        autoFocus
                     />
                     <button className="catAdd" type="submit">
                         <IoIosAddCircleOutline />

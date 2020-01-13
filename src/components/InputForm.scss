@@ -1,6 +1,6 @@
 @import '../utils.scss';
 
-.inputBox{
+.inputBox {
     margin-bottom: 20px;
     padding: 10px;
     border: solid 1px $themeColor5;
@@ -9,27 +9,26 @@
 
 .inputBox form {
     display: grid;
-    grid-template-rows: 40px 30px;
-    grid-template-columns: 140px auto 40px;
+    grid-template-rows: 30px 40px;
+    grid-template-columns: 120px auto 40px;
     grid-template-areas:
-        "inText inText subButton"
-        "option1 option2 option2";
+        'option1 option2 option2'
+        'inText inText subButton';
     grid-gap: 10px;
     align-items: stretch;
     justify-items: stretch;
 
     @include smScreen {
-        grid-template-rows: 40px 30px 30px 40px;
-        grid-template-columns: auto 40px;
+        grid-template-rows: 30px 40px 40px;
+        grid-template-columns: auto auto;
         grid-template-areas:
-            "inText inText"
-            "option1 option1"
-            "option2 option2"
-            "empty subButton";
+            'option1 option2'
+            'inText inText'
+            'subButton subButton';
     }
 
     .todoInputText {
-        grid-area : inText;
+        grid-area: inText;
         padding: 0 10px;
         border-radius: 6px;
         border: solid 1px $themeColor1;
@@ -41,32 +40,37 @@
             font-size: 1.2em;
         }
     }
-    
+
     .todoInputButton {
-        grid-area : subButton;
+        width: 40px;
+        grid-area: subButton;
         background-color: $themeColor3;
-        padding:0;
+        padding: 0;
         border-radius: 6px;
         border: none;
         color: $themeColor2;
         font-size: 2em;
         line-height: 0;
         transition: transform 100ms;
-        
-        &:hover{
+
+        &:hover {
             transform: translateY(2px);
         }
+
+        @include smScreen {
+            justify-self: end;
+        }
     }
-    
+
     .inputOptionPrio {
-        grid-area : option2;
+        grid-area: option2;
         align-self: center;
         justify-self: start;
     }
-    
+
     .inputOptionCat {
-        grid-area : option1;
-    
+        grid-area: option1;
+
         select {
             width: 100%;
             height: 100%;
@@ -76,5 +80,4 @@
             color: $themeColor1;
         }
     }
-
 }
