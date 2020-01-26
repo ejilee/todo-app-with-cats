@@ -18,7 +18,71 @@ function createBulkTodos() {
             text: `todo item #${i}`,
             isBeingEdited: false,
         });
-    }
+    };
+    array.push({
+        id: bulkStartNum+1,
+        checked: false,
+        cate: 2,
+        prior: 1,
+        text: `고양이 고봉밥 대접하기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+3,
+        checked: false,
+        cate: 1,
+        prior: 1,
+        text: `화분에 물 주기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+4,
+        checked: false,
+        cate: 1,
+        prior: 3,
+        text: `나무에 비료 주기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+5,
+        checked: false,
+        cate: 3,
+        prior: 3,
+        text: `강아지 쓰다듬기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+6,
+        checked: false,
+        cate: 3,
+        prior: 2,
+        text: `강아지 산책시키기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+7,
+        checked: false,
+        cate: 2,
+        prior: 3,
+        text: `고양이 사료 추가 주문하기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+8,
+        checked: false,
+        cate: 0,
+        prior: 3,
+        text: `방 청소하기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+9,
+        checked: false,
+        cate: 0,
+        prior: 2,
+        text: `리덕스 이해하기`,
+        isBeingEdited: false,
+    },{
+        id: bulkStartNum+10,
+        checked: false,
+        cate: 0,
+        prior: 3,
+        text: `지갑에 있는 동전 없애기`,
+        isBeingEdited: false,
+    });
     return array;
 }
 
