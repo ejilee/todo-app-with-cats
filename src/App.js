@@ -177,7 +177,7 @@ function App() {
     );
     const [cats, dispatchCats] = useReducer(catsReducer, catsData);
     const [catsModalState, setCatsModalState] = useState(false);
-    let nextTodoId = useRef(bulkStartNum + 1);
+    let nextTodoId = useRef(bulkStartNum + 11);
     let nextCatId = useRef(5);
 
     const todoItemAdd = useCallback((inputValue, catValue, prioValue) => {
