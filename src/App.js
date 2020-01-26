@@ -5,11 +5,11 @@ import TodoCats from './components/TodoCats';
 import TodoList from './components/TodoList';
 import CatsModal from './components/CatsModal.js';
 
-const bulkStartNum = 2500;
+const bulkStartNum = 250;
 
 function createBulkTodos() {
     const array = [];
-    for (let i = 1; i <= bulkStartNum; i++) {
+    for (let i = 1; i <= bulkStartNum-10; i++) {
         array.push({
             id: i,
             checked: false,
@@ -20,63 +20,63 @@ function createBulkTodos() {
         });
     };
     array.push({
-        id: bulkStartNum+1,
+        id: bulkStartNum-9,
         checked: false,
         cate: 2,
         prior: 1,
         text: `고양이 고봉밥 대접하기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+3,
+        id: bulkStartNum-8,
         checked: false,
         cate: 1,
         prior: 1,
         text: `화분에 물 주기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+4,
+        id: bulkStartNum-7,
         checked: false,
         cate: 1,
         prior: 3,
         text: `나무에 비료 주기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+5,
+        id: bulkStartNum-6,
         checked: false,
         cate: 3,
         prior: 3,
         text: `강아지 쓰다듬기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+6,
+        id: bulkStartNum-5,
         checked: false,
         cate: 3,
         prior: 2,
         text: `강아지 산책시키기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+7,
+        id: bulkStartNum-4,
         checked: false,
         cate: 2,
         prior: 3,
         text: `고양이 사료 추가 주문하기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+8,
+        id: bulkStartNum-3,
         checked: false,
         cate: 0,
         prior: 3,
         text: `방 청소하기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+9,
+        id: bulkStartNum-2,
         checked: false,
         cate: 0,
         prior: 2,
         text: `리덕스 이해하기`,
         isBeingEdited: false,
     },{
-        id: bulkStartNum+10,
+        id: bulkStartNum-1,
         checked: false,
         cate: 0,
         prior: 3,
@@ -177,7 +177,7 @@ function App() {
     );
     const [cats, dispatchCats] = useReducer(catsReducer, catsData);
     const [catsModalState, setCatsModalState] = useState(false);
-    let nextTodoId = useRef(bulkStartNum + 11);
+    let nextTodoId = useRef(bulkStartNum);
     let nextCatId = useRef(5);
 
     const todoItemAdd = useCallback((inputValue, catValue, prioValue) => {
