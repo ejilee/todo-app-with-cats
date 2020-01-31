@@ -1,5 +1,9 @@
 @import './utils.scss';
 
+html{
+    overflow-y: overlay;
+}
+
 body {
     font-size: 62.5%;
 }
