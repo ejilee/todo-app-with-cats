@@ -1,14 +1,15 @@
 import React from 'react';
-import './TodoCats.scss';
+import './TodoTabs.scss';
 import { IoMdFlower } from 'react-icons/io';
 
-const TodoCats = ({ cats, todos, openCatsModal }) => {
+const TodoTabs = ({ cats, todos, openCatsModal, currentTab, changeCurrentTab }) => {
+
     return (
         <div>
             <ul className="TodoListCatsList">
-                <li className="TodoListCat currentCat">all ({todos.length})</li>
+                <li className={"TodoListCat " + (currentTab === 'all' ? 'currentCat' : '')} onClick={() => changeCurrentTab('all')}>all ({todos.length})</li>
                 {cats.map(cat => (
-                    <li className="TodoListCat" key={cat.id}>
+                    <li className={"TodoListCat " + (currentTab === cat.id ? 'currentCat' : '')} key={cat.id} onClick={() => changeCurrentTab(cat.id)}>
                         {cat.name} (
                         {todos.filter(todo => todo.cate === cat.id).length})
                     </li>
@@ -25,4 +26,4 @@ const TodoCats = ({ cats, todos, openCatsModal }) => {
     );
 };
 
-export default React.memo(TodoCats);
+export default React.memo(TodoTabs);

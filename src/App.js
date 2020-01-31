@@ -1,11 +1,11 @@
 import React, { useState, useRef, useCallback, useReducer } from 'react';
 import './App.scss';
 import InputForm from './components/InputForm';
-import TodoCats from './components/TodoCats';
+import TodoTabs from './components/TodoTabs';
 import TodoList from './components/TodoList';
 import CatsModal from './components/CatsModal.js';
 
-const bulkStartNum = 250;
+const bulkStartNum = 50;
 
 function createBulkTodos() {
     const array = [];
@@ -13,7 +13,7 @@ function createBulkTodos() {
         array.push({
             id: i,
             checked: false,
-            cate: 0,
+            cate: Math.floor(Math.random() * 4),
             prior: 3,
             text: `todo item #${i}`,
             isBeingEdited: false,
@@ -24,7 +24,7 @@ function createBulkTodos() {
         checked: false,
         cate: 2,
         prior: 1,
-        text: `고양이 고봉밥 대접하기`,
+        text: `고양이 밥주기`,
         isBeingEdited: false,
     },{
         id: bulkStartNum-8,
@@ -82,6 +82,13 @@ function createBulkTodos() {
         prior: 3,
         text: `지갑에 있는 동전 없애기`,
         isBeingEdited: false,
+    },{
+        id: bulkStartNum,
+        checked: false,
+        cate: 0,
+        prior: 3,
+        text: `점심먹기`,
+        isBeingEdited: false,
     });
     return array;
 }
@@ -90,7 +97,7 @@ const catsData = [
     {
         id: 0,
         sort: 0,
-        name: '-',
+        name: 'uncategorized',
         isBeingEdited: false,
     },
     {
@@ -177,8 +184,9 @@ function App() {
     );
     const [cats, dispatchCats] = useReducer(catsReducer, catsData);
     const [catsModalState, setCatsModalState] = useState(false);
-    let nextTodoId = useRef(bulkStartNum);
+    let nextTodoId = useRef(bulkStartNum+1);
     let nextCatId = useRef(5);
+    const [currentTab, setCurrentTab] = useState('all');
 
     const todoItemAdd = useCallback((inputValue, catValue, prioValue) => {
         const todo = {
@@ -206,7 +214,7 @@ function App() {
     }, []);
 
     const todoItemModify = useCallback((todoItemId, todoItemText) => {
-        // dispatchTodo({ type: 'MODIFY', todoItemId, todoItemText });
+        dispatchTodo({ type: 'MODIFY', todoItemId, todoItemText });
     }, []);
 
     const openCatsModal = useCallback(() => {
@@ -241,9 +249,13 @@ function App() {
         dispatchCats({ type: 'MODIFY', catItemId, catItemText });
     }, []);
 
+    const changeCurrentTab = useCallback((selectTabId) => {
+        isNaN(selectTabId) ? setCurrentTab('all') : setCurrentTab(selectTabId);
+    },[]);
+
     return (
         <div className="App">
-            <header className="App-header">Kitty Needs Kibbles</header>
+<header className="App-header">Kitty Needs Kibbles</header>
             <main className="App-main">
                 <CatsModal
                     todos={todos}
@@ -256,14 +268,17 @@ function App() {
                     catModify={catModify}
                 />
                 <InputForm cats={cats} todoItemAdd={todoItemAdd} />
-                <TodoCats
+                <TodoTabs
                     cats={cats}
                     todos={todos}
                     openCatsModal={openCatsModal}
+                    currentTab={currentTab}
+                    changeCurrentTab={changeCurrentTab}
                 />
                 <TodoList
                     cats={cats}
                     todos={todos}
+                    currentTab={currentTab}
                     todoItemRemove={todoItemRemove}
                     todoItemToggleCheck={todoItemToggleCheck}
                     todoItemToggleEdit={todoItemToggleEdit}

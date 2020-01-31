@@ -17,7 +17,6 @@ const CatsListItem = ({
     const { id, name, isBeingEdited } = cat;
 
     const [inputValue, setInputValue] = useState(name);
-    console.log(inputValue);
 
     const inputOnChange = useCallback(e => {
         setInputValue(e.target.value);
@@ -37,6 +36,14 @@ const CatsListItem = ({
             e.preventDefault();
         },
         [id, inputValue, catToggleEdit, catModify],
+    );
+
+    const inputOnCancelEdit = useCallback(
+        () => {
+            setInputValue(name);
+            catToggleEdit(id);
+        },
+        [id, name, catToggleEdit]
     );
 
     const onCatDelete = useCallback(
@@ -89,7 +96,7 @@ const CatsListItem = ({
                     </button>
                     <button
                         className="cancelEdit"
-                        onClick={() => catToggleEdit(id)}
+                        onClick={inputOnCancelEdit}
                     >
                         <IoIosClose />
                     </button>

@@ -39,6 +39,7 @@
             font-size: 3em;
             &:hover {
                 color: $themeColor1;
+                cursor: pointer;
             }
         }
 
@@ -77,6 +78,7 @@
 
                 &:hover {
                     transform: translateY(2px);
+                    cursor: pointer;
                 }
             }
         }

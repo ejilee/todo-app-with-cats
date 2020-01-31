@@ -21,7 +21,6 @@ const TodoListItem = ({
     const { id, checked, cate, prior, text, isBeingEdited } = todo;
 
     const [inputValue, setInputValue] = useState(text);
-    console.log(inputValue);
 
     const inputOnChange = useCallback(e => {
         setInputValue(e.target.value);
@@ -41,6 +40,14 @@ const TodoListItem = ({
             e.preventDefault();
         },
         [id, inputValue, todoItemToggleEdit, todoItemModify],
+    );
+
+    const inputCancelEdit = useCallback(
+        () => {
+            setInputValue(text);
+            todoItemToggleEdit(id)
+        },
+        [id, text, todoItemToggleEdit]
     );
 
     return (
@@ -85,7 +92,7 @@ const TodoListItem = ({
                     </button>
                     <button
                         className="cancelEdit"
-                        onClick={() => todoItemToggleEdit(id)}
+                        onClick={inputCancelEdit}
                     >
                         <IoIosClose />
                     </button>

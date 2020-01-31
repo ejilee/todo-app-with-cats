@@ -5,6 +5,7 @@ import './TodoList.scss';
 const TodoList = ({
     cats,
     todos,
+    currentTab,
     todoItemRemove,
     todoItemToggleCheck,
     todoItemToggleEdit,
@@ -13,17 +14,31 @@ const TodoList = ({
     return (
         <div className="TodoListPage">
             <ul>
-                {todos.map(todo => (
-                    <TodoListItem
-                        cat={cats.find(cat => cat.id === todo.cate)}
-                        todo={todo}
-                        key={todo.id}
-                        todoItemRemove={todoItemRemove}
-                        todoItemToggleCheck={todoItemToggleCheck}
-                        todoItemToggleEdit={todoItemToggleEdit}
-                        todoItemModify={todoItemModify}
-                    />
-                ))}
+                {currentTab === 'all' ? (
+                    todos.map(todo => (
+                        <TodoListItem
+                            cat={cats.find(cat => cat.id === todo.cate)}
+                            todo={todo}
+                            key={todo.id}
+                            todoItemRemove={todoItemRemove}
+                            todoItemToggleCheck={todoItemToggleCheck}
+                            todoItemToggleEdit={todoItemToggleEdit}
+                            todoItemModify={todoItemModify}
+                        />
+                    ))
+                ) : (
+                    todos.filter(todo => todo.cate === currentTab).map(todo => (
+                        <TodoListItem
+                            cat={cats.find(cat => cat.id === todo.cate)}
+                            todo={todo}
+                            key={todo.id}
+                            todoItemRemove={todoItemRemove}
+                            todoItemToggleCheck={todoItemToggleCheck}
+                            todoItemToggleEdit={todoItemToggleEdit}
+                            todoItemModify={todoItemModify}
+                        />
+                    ))
+                )}
             </ul>
         </div>
     );

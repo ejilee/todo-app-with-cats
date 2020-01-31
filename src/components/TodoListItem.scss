@@ -5,6 +5,7 @@
     min-height: 32px;
     display: flex;
     margin: 6px 0;
+    padding: 2px 0;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
@@ -21,6 +22,7 @@
         border: none;
         color: $themeColor5;
         font-size: 1.4em;
+        cursor: pointer;
 
         &:hover {
             color: $themeColor1;
@@ -48,6 +50,7 @@
         background-color: $themeColor2;
         color: $themeColor1;
         text-align: center;
+        border: solid 1px #FFF;
 
         @include smScreen {
             padding: 4px 4px;
@@ -73,6 +76,7 @@
         background: none;
         color: $themeColor5;
         font-size: 1.4em;
+        cursor: pointer;
 
         &:hover {
             color: $themeColor1;
@@ -87,6 +91,7 @@
         background: none;
         color: $themeColor5;
         font-size: 1.4em;
+        cursor: pointer;
 
         &:hover {
             color: $themeColor3;
