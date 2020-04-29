@@ -1,0 +1,131 @@
+.todoListItem {
+  width: 100%;
+  min-height: 32px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 6px 0;
+  padding: 2px 0;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  line-height: 1.5em;
+}
+
+.todoListItem:hover {
+  background-color: #f7f7f7;
+}
+
+.todoListItem .checkBox {
+  padding: 0;
+  margin-right: 6px;
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.todoListItem .checkBox:hover {
+  color: #375077;
+}
+
+.todoListItem .priorityFlag {
+  padding: 0;
+  margin-right: 6px;
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.2em;
+}
+
+.todoListItem .catLabel {
+  min-width: 60px;
+  max-width: 120px;
+  padding: 4px 10px;
+  margin: auto 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  color: #375077;
+  text-align: center;
+  border: solid 1px #FFF;
+}
+
+@media (max-width: 370px) {
+  .todoListItem .catLabel {
+    padding: 4px 4px;
+  }
+}
+
+.todoListItem .todoText {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #333;
+  word-break: break-all;
+}
+
+.todoListItem .todoEditText {
+  width: calc(100% - 78px);
+  color: #375077;
+}
+
+.todoListItem .editButton,
+.todoListItem .applyEdit {
+  padding: 0;
+  margin-left: 6px;
+  border: none;
+  background: none;
+  color: #999;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.todoListItem .editButton:hover,
+.todoListItem .applyEdit:hover {
+  color: #375077;
+}
+
+.todoListItem .deleteButton,
+.todoListItem .cancelEdit {
+  margin-left: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #999;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.todoListItem .deleteButton:hover,
+.todoListItem .cancelEdit:hover {
+  color: #df5c74;
+}
+
+.todoChecked_true .todoText {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.todoListPriority1 .priorityFlag {
+  color: #df5c74;
+}
+
+.todoListPriority2 .priorityFlag {
+  color: #375077;
+}
+
+.todoListPriority3 .priorityFlag {
+  color: #999;
+}
+/*# sourceMappingURL=TodoListItem.css.map */

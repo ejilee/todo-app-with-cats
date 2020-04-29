@@ -1,0 +1,51 @@
+html {
+  overflow-y: overlay;
+}
+
+body {
+  font-size: 62.5%;
+}
+
+.App {
+  width: 100%;
+  max-width: 900px;
+  display: -ms-grid;
+  display: grid;
+  margin: 0 auto;
+  color: #333;
+}
+
+@media (max-width: 1024px) {
+  .App {
+    max-width: 1000px;
+  }
+}
+
+.App > * {
+  width: inherit;
+  padding: 10px 16px;
+  margin: 0;
+}
+
+.App .App-header {
+  background: #375077;
+  text-align: left;
+  font-size: 2em;
+  font-weight: 600;
+  color: #fff;
+}
+
+.App .App-main {
+  background: #f7f7f7;
+  text-align: center;
+  font-size: 1.4em;
+  padding: 24px;
+  max-width: 100%;
+}
+
+.App .App-footer {
+  text-align: right;
+  font-size: 1.2em;
+  color: #999;
+}
+/*# sourceMappingURL=App.css.map */
