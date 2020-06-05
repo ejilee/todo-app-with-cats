@@ -1,6 +1,6 @@
 @import './utils.scss';
 
-html{
+html {
     overflow-y: overlay;
 }
 
@@ -46,4 +46,18 @@ body {
         font-size: 1.2em;
         color: $themeColor5;
     }
+}
+
+input[type='text']:focus {
+    outline: 2px solid $themeColor1;
+}
+
+button:focus {
+    outline: none;
+}
+
+select:focus,
+select:active,
+select:hover {
+    outline: none;
 }
